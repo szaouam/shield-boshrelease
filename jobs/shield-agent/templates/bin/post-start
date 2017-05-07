@@ -46,10 +46,10 @@ provision() {
 }
 job() {
   local name=$1
-  local targ=$(shield -c ${SHIELD_CONFIG} --raw show-target   $2 | jq -r '.uuid // empty')
-  local stor=$(shield -c ${SHIELD_CONFIG} --raw show-store    $3 | jq -r '.uuid // empty')
-  local retn=$(shield -c ${SHIELD_CONFIG} --raw show-policy   $4 | jq -r '.uuid // empty')
-  local sche=$(shield -c ${SHIELD_CONFIG} --raw show-schedule $5 | jq -r '.uuid // empty')
+  local targ=$(shield -c ${SHIELD_CONFIG} --raw target   $2 | jq -r '.uuid // empty')
+  local stor=$(shield -c ${SHIELD_CONFIG} --raw store    $3 | jq -r '.uuid // empty')
+  local retn=$(shield -c ${SHIELD_CONFIG} --raw policy   $4 | jq -r '.uuid // empty')
+  local sche=$(shield -c ${SHIELD_CONFIG} --raw schedule $5 | jq -r '.uuid // empty')
 
   cat <<EOF | provision $name job
 {"name":      "${name}",
