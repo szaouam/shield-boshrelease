@@ -35,7 +35,7 @@ shield -c ${SHIELD_CONFIG} create-backend default <%= endpoint %>
 -%>
 provision() {
 	local name=$1; shift
-	uuid=$(shield -c ${SHIELD_CONFIG} --raw show-$* $name | jq -r '.uuid // empty')
+	uuid=$(shield -c ${SHIELD_CONFIG} --raw $* $name | jq -r '.uuid // empty')
 	if [[ -z ${uuid} ]]; then
 		echo "Creating a new $* named '$name'"
 		tee >(shield -c ${SHIELD_CONFIG} --raw create-$*)
