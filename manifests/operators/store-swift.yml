@@ -1,0 +1,13 @@
+---
+- type: replace
+  path: /instance_groups/name=shield/jobs/name=shield-agent/properties/stores?
+  value:
+    default:
+      plugin: swift # https://github.com/starkandwayne/shield/blob/master/plugin/swift/plugin.go
+      config:
+        auth-url: ((swift-auth-url))
+        project-name: ((swift-project-name))
+        username: ((swift-username))
+        password: ((swift-password))
+        container: ((swift-container))
+        prefix: ((swift-prefix))
