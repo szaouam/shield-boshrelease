@@ -1,0 +1,17 @@
+---
+- type: replace
+  path: /instance_groups/name=shield/vm_type
+  value: ((vm-type))
+
+- type: replace
+  path: /instance_groups/name=shield/networks
+  value:
+  - name: ((network-name))
+
+- type: replace
+  path: /instance_groups/name=shield/persistent_disk_type
+  value: ((persistent-disk-type))
+
+- type: replace
+  path: /instance_groups/name=shield/azs
+  value: [((az))]
