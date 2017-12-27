@@ -8,6 +8,11 @@ templates:
   bin/run:           bin/run
   config/import.yml: config/import.yml
 
+consumes:
+  - name: shield
+    type: shield
+    optional: true
+
 properties:
   import:
     description: A complete `buckler import' YAML file, for importing and auto-provisioning tenants, users, cloud storage, data systems, etc.
