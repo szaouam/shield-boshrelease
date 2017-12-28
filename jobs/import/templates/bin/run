@@ -1,6 +1,18 @@
 #!/bin/bash
 set -eu
 export HOME=/home/vcap
+export SHIELD_CORE_TOKEN="<%= p('import.token') %>"
+export SHIELD_CORE="<%= p('import.Core') %>"
+<%
+    shield_url = ''
+    if_link('shield') do |shield|
+      shield_url = "https://#{shield.p('domain')}:#{shield.p('port')}"
+    end
+%>
+export SHIELD_API="<%= shield_url %>"
+
+/var/vcap/packages/shield/bin/shield api $SHIELD_API shield -k
+/var/vcap/packages/shield/bin/shield  login
 sed -e '
   s/(deployment)/<%= spec.deployment %>/g;
   s/(index)/<%= spec.index.to_s %>/g;
@@ -8,5 +20,5 @@ sed -e '
   s/(name)/<%= spec.name %>/g;
   s/(az)/<%= spec.az %>/g;
 ' /var/vcap/jobs/import/config/import.yml |\
-  /var/vcap/packages/shield/bin/buckler import -
+  /var/vcap/packages/shield/bin/shield import -
 exit 0
